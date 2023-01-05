@@ -1,0 +1,49 @@
+The application was developed and tested with -
+Apache Spark (version 3.3.1)
+sbt  (version 1.7.2)
+Scala (version 2.12.15)
+Java (version 11.0.17)
+Ubuntu 20.04
+Intellij Idea IDE CE
+
+Once the flight-data file is downloaded, we can extract the zip file, enter into the directory and run the following commands =>
+
+--------------
+To compile
+--------------
+Run the following command -
+sbt clean compile
+
+------------------
+To run test cases
+------------------
+Run the following command -
+sbt test
+
+-------------------
+To run the program
+-------------------
+Run the following command -
+sbt run
+
+( Please ignore any java.nio.file.NoSuchFileException at the end of the command. You will see [success] message above
+the error message which means the program ran successfully. )
+
+-------------------------
+To build the runnable jar
+-------------------------
+Run the following command -
+sbt clean assembly
+
+The jar file will be created under target/scala-2.12 directory as flight-data-assignment-1.0.jar
+
+
+To run the program from the jar file directory, we must specify the config file as first command line argument.
+Here is the sample command -
+
+java -jar flight-data-assignment-1.0.jar application.conf
+
+application.conf contains 3 properties. See src/main/resources/application.conf for reference.
+
+
+

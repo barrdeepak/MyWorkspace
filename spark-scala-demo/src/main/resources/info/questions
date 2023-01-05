@@ -1,0 +1,133 @@
+1. What is RDD and DF ?
+2. How to load CSV with properties.
+3. Spark SQL - Register table and query
+4. Spark streaming
+5. Watermarking and windowing in spark-streaming
+----------
+1. What is shuffling ? what is shuffle write ?
+2. broadcast joins
+3. Checkpointing
+4. Triggers
+5. Watermarking
+6. Window functions
+7. What is RDD ? why is it resilient ?>
+9. What is driver and executor ?
+11. Difference between RDD, dataset and dataframe. How do decide which one to use ?
+12. Why spark is faster than hadoop MR ?
+13. Difference between coalsce and repartition ?
+14. What is atleast once and exactly once processing in spark/spark streaming ?
+15. What are some of the optimizations that we can do for spark jobs ? For e.g. broadcast joins, caching, remove shuffling etc.
+16. What is Job, stage and task in a spark job
+17. How skewed data affects spark job ? How can we solve the problem ? ( Use key salting)
+-------------------
+
+
+
+5. Spart functions like :
+df.select(
+      count("*").as("Count *"),
+      sum("dockcount").alias("Total Dock"),
+      avg("dockcount").alias("avg dock"),
+      countDistinct("landmark").alias("landmark count"),
+      approx_count_distinct("station_id").alias("app station"),
+      sumDistinct("station_id").alias("station_id")
+      ).show()
+df.select(
+      first("station_id").alias("first"),
+      last("station_id").alias("last"),
+      min("dockcount").alias("min"),
+      max("dockcount").alias("max")
+      ).show()
+
+  selectExpr(), $ sign usage.
+df.orderBy("salary").selectExpr("salary*2").show
+df.orderBy("salary").selectExpr("salary*2").show
+
+Join example
+df.join(df2, df("job_id") === df2("job_id"), "inner")
+join could be "inner","left", "right", "full", "cross"
+
+these 2 are same
+df.join(df2, df("job_id")===df2("job_id"),"inner")
+df.join(df2, Seq("job_id"), "inner")
+df.join(df2) => this is will cross join. If df1 = 4, df2 =5, output will be 20rows
+
+
+Order by
+
+df.orderBy(col("salary")).select(col("salary")+1).show
+
+df.orderBy(col("salary").desc).select(col("salary")+1).show
+
+df.orderBy($"salary".desc).show OR df.orderBy($col("salary").desc).show
+
+Seems like
+filter() and where() are same
+Both works
+.filter($"min_salary" < $"salary"  and $"salary" < $"max_salary")
+.filter($"min_salary" < $"salary"  && $"salary" < $"max_salary")
+orderBy() and sort() are same
+$"salary" and col("salary") are same
+For equal, use === , For others use < or >
+
+
+df.join(df2.limit(6), df("job_id") === df2("job_id"), "left").select("employee_id","salary","job_title","min_salary","max_salary").show
+
+withColum(), withColumnRenamed(), drop()
+df2.withColumn("salary_range", $"max_salary" - $"min_salary").withColumnRenamed("job_title", "job_title_name").drop($"job_id").show
+
+
+Create temp tale from DF
+df.createOrReplaceTempView("employees")
+df2.createOrReplaceTempView("jobs")
+
+Distinct/Union/dropDuplicates()
+df.union(df).count => 2X
+df.union(df).distinct.count => X
+df.union(df).dropDuplicates().count => X
+
+cache() and persist()
+---
+Both are used to store
+RDD.cache() is memory only
+DF.cache() is memory and disk
+persist() = default is memory and disk but it provides many other options to store like memory only etc
+
+Broadcast and broadcast joins
+df.join(broadcast(df2), Seq("job_id"),"inner")
+
+Parquet
+spark.read.parquet("file:///home/deepak/employees.parquet")
+df.write.parquet("file:///home/deepak/employees.parquet")
+
+groupBy
+df.groupBy("department_id").agg(avg("salary").alias("avgg"), sum("salary").alias("salary"), count("*").alias("count")).show
+
+------------------------
+4 Spark properties
+ num_executors
+ executor_cores
+ executor_memory
+ driver_memory
+----------------------------
+Spark streaming => Microbatching
+Links => https://medium.com/expedia-group-tech/apache-spark-structured-streaming-checkpoints-and-triggers-4-of-6-b6f15d5cfd8d
+
+1. Checkpointing
+2. Triggers
+3. Windowing
+4. Watermarking
+
+val inputDF = spark.readStream.format("rate").option("rowsPerSecond", 1).load()
+val transformed = inputDF.withColumn("result", col("value") + lit(1))
+transformed.writeStream.outputMode("complete").trigger(Trigger.ProcessingTime("5 second")).option("truncate", false).format("console").start().awaitTermination()
+
+
+def f1(implicit x:Int, y:String) // x and y are implicit
+def f2(y:String)(implicit x:Int) /
+
+----------------
+RDD operations
+
+df2.rdd.map(x => x.get(1)).collect.println
+
