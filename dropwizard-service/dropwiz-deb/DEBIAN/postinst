@@ -1,0 +1,10 @@
+mkdir -p ~/install/service-drop-wiz/service
+mkdir -p ~/install/service-drop-wiz/conf
+mkdir -p ~/install/service-drop-wiz/log
+
+cp ../dropwizard-service-1.0-SNAPSHOT.jar ~/install/service-drop-wiz/service
+cp ../configuration.yml ~/install/service-drop-wiz/service
+chmod +x ../scripts/*
+cp ../scripts/start.sh ~/install/service-drop-wiz/service/
+cp ../scripts/stop.sh ~/install/service-drop-wiz/service/
+cp ../scripts/service-dropwiz /etc/init.d/

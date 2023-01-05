@@ -1,0 +1,46 @@
+1. Learn how to initialize arrays and lists.
+2. Don't forget colon.
+3. Don't use val.
+4. Don't forget return keyword
+5. Remember Arrays.sort(), Collectins.sort(). Learn how to use comparator for sorting.
+
+Arrays.sort(newEmployees, new Comparator<Employee>() {
+    @Override
+    public int compare(Employee emp1, Employee emp2) {
+        return emp1.getName().compareTo(emp2.getName());
+    }
+});
+
+public class EmployeeAgeComparator implements Comparator<Employee> {
+    @Override
+    public int compare(Employee emp1, Employee emp2) {
+        return emp1.getAge() - emp2.getAge();
+    }
+}
+
+Collections.sort(names, Collections.reverseOrder());
+https://howtodoinjava.com/java/sort/collections-sort/
+
+6. Always remember the corner case i.e. when input is null or input array is size one or input is empty etc.
+7. Queue implementations -
+Queue<String> str_queue = new LinkedList<> ();
+Queue<String> str_pqueue = new PriorityQueue<> ();
+Queue<Integer> int_queue = new ArrayDeque<> ();
+Methods => peek(), add(), poll(), remove()
+
+
+
+
+
+----------------------------------
+
+SQL Pointers
+
+1. Learn window functions = row_number, rank, dense_rank etc.
+2. non-equi joins - joins not based on equal conditions.
+3. Join types = left, right, left outer, right outer, full outer.
+4. Learn self joins and when to use it.
+5. Partitioning and clustering.
+6. BQ UNNEST functionality.
+7. Learn conditional expressions - if, ifnull, case statements.
+8. CTE expressions.

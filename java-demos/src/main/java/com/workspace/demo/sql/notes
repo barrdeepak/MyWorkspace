@@ -1,0 +1,12 @@
+1. Learn difference between lead() and lag()
+2. Learn window functions and difference between row_number(), rank() and dense_rank().
+3. Learn out about joins and use cases for self joins. For joins, use venn diagrams to visualize.
+4. LEFT JOIN and LEFT OUTER JOIN are same. Similarly, RIGHT JOIN/RIGHT OUTER JOIN and JOIN/INNER JOIN.
+5. What re FULL OUTER JOIN and CROSS JOIN ?
+6. The questions that asks for Nth highest is important. Look out for questions that require self joins.
+7. Important functions/stmts => IFNULL(), NULLIF(), IF(), CASE, COALESCE, DATE_ADD(), DATE_DIFF(), CAST(),
+8. What are non-equi joins ?
+9. Learn about CTE and stored procedures, functions.
+10. Learn unnest functions in BQ.
+11. Learn about struct like datatypes.
+12. Learn about partitioning, bucketing and clustering.

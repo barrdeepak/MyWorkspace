@@ -1,0 +1,23 @@
+All commands to be run from CONFLUENT_HOME
+-------------------------------------------
+
+Start zookeeper
+bin/zookeeper-server-start etc/kafka/zookeeper.properties
+
+Start Kafka server
+bin/kafka-server-start etc/kafka/server.properties
+
+Create topic
+bin/kafka-topics --create bootstrap-server localhost:9092 --topic input_topic
+
+List topics
+bin/kafka-topics --list --bootstrap-server localhost:9092
+
+Delete topic
+bin/kafka-topics --delete --bootstrap-server localhost:9092  --topic stocks_max
+
+Consume from topic
+bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic stocks_max --from-beginning
+
+Write to topic
+bin/kafka-console-producer --bootstrap-server localhost:9092 --topic input_topic
