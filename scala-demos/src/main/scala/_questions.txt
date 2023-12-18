@@ -1,0 +1,22 @@
+1. Case class
+2. Fold function
+3. Lazy evalutation
+4. Trait
+5. Diff between Object class
+6. Why its called functional programming ?
+7. Mutable and Immutable collections
+8. Tuples
+9. var vs val
+10. Option
+11. literals
+12. Array.ofDim()
+13. map() vs flatMap()
+14. higher-order functions in scala
+15. Multiple inheritance
+16. Anonymous functions
+17. tail recursion
+18. Nil, Null, None and Nothing differences
+19. yield keyword
+20. Implicit keyword
+21.
+
